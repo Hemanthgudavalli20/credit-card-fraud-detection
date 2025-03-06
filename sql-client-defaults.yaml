@@ -1,0 +1,26 @@
+execution:
+  planner: blink
+  type: streaming
+  result-mode: table
+
+python:
+  python-client-executable: /home/ubuntu/flink-env/bin/python3
+  python-files: /home/ubuntu/flink1/udf/dynamodb_lookup.py
+  python-requirements: /home/ubuntu/flink-env
+
+pipeline:
+  jars:
+    python-client-executable: /home/ubuntu/flink1/lib/flink-sql-connector-kafka-1.17.2.jar
+    python-files: /home/ubuntu/flink1/lib/iceberg-flink-runtime-1.17-1.4.1.jar
+    
+
+catalogs:
+  my_catalog:
+    type: generic_in_memory
+    default-database: my_database
+
+table:
+  sql-dialect: default
+  default-catalog: my_catalog
+  default-database: my_database
+
